@@ -1,0 +1,350 @@
+{
+  "questions": {
+    "physics": [
+      {
+        "id": 1,
+        "subject": "physics",
+        "topic": "Kinematics",
+        "question_text": "A car starts from rest and accelerates uniformly at 2 m/s² for 5 seconds. What is the distance travelled by the car?",
+        "options": { "A": "25 m", "B": "50 m", "C": "10 m", "D": "100 m" },
+        "correct_option": "A",
+        "explanation": "The correct option is A because s = (1/2)at². With u=0, a=2 m/s², t=5s → s=25m. Option B wrongly assumes initial velocity. Option C ignores the square of time. Option D forgets the 1/2 factor.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "A"
+      },
+      {
+        "id": 2,
+        "subject": "physics",
+        "topic": "Laws of Motion",
+        "question_text": "A 5 kg block is placed on a horizontal surface with μ=0.2. A 30 N force is applied (g=10 m/s²). What is the acceleration?",
+        "options": { "A": "6 m/s²", "B": "4 m/s²", "C": "2 m/s²", "D": "5 m/s²" },
+        "correct_option": "B",
+        "explanation": "Correct is B. Friction = 0.2×5×10=10N. Net force=30-10=20N. a=20/5=4 m/s². Option A ignores friction. Option C overestimates friction.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "B"
+      },
+      {
+        "id": 3,
+        "subject": "physics",
+        "topic": "Work, Energy and Power",
+        "question_text": "Work done by gravity when a 2 kg object is lifted 10 m vertically (g=10 m/s²)?",
+        "options": { "A": "200 J", "B": "-200 J", "C": "0 J", "D": "100 J" },
+        "correct_option": "B",
+        "explanation": "Correct is B. W = mgh cos180° = -200 J (force and displacement opposite). Option A misses negative sign. Option C wrongly thinks gravity does no work.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 4,
+        "subject": "physics",
+        "topic": "Gravitation",
+        "question_text": "If gravitational force F between two masses is doubled in mass and distance halved, new force is?",
+        "options": { "A": "2F", "B": "4F", "C": "8F", "D": "16F" },
+        "correct_option": "D",
+        "explanation": "Correct is D. F ∝ m1m2/r² → new = (2m1)(2m2)/(r/2)² = 4 × 4F = 16F.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "C"
+      },
+      {
+        "id": 5,
+        "subject": "physics",
+        "topic": "Thermodynamics",
+        "question_text": "Internal energy of an ideal gas depends only on?",
+        "options": { "A": "Pressure", "B": "Volume", "C": "Temperature", "D": "Density" },
+        "correct_option": "C",
+        "explanation": "Correct is C. For ideal gas, U depends only on temperature.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "C"
+      },
+      {
+        "id": 6,
+        "subject": "physics",
+        "topic": "Electrostatics",
+        "question_text": "Electric potential at midpoint between +q and -q separated by 2a is?",
+        "options": { "A": "zero", "B": "kq/a", "C": "2kq/a", "D": "-kq/a" },
+        "correct_option": "A",
+        "explanation": "Correct is A. V = kq/a + k(-q)/a = 0.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "A"
+      },
+      {
+        "id": 7,
+        "subject": "physics",
+        "topic": "Current Electricity",
+        "question_text": "Equivalent resistance of 2Ω, 3Ω and 6Ω in parallel?",
+        "options": { "A": "11 Ω", "B": "1 Ω", "C": "2 Ω", "D": "6 Ω" },
+        "correct_option": "B",
+        "explanation": "Correct is B. 1/Req = 1/2 + 1/3 + 1/6 = 1 → Req=1Ω.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "B"
+      },
+      {
+        "id": 8,
+        "subject": "physics",
+        "topic": "Magnetism",
+        "question_text": "Magnetic field due to straight current wire at distance r is proportional to?",
+        "options": { "A": "1/r", "B": "1/r²", "C": "r", "D": "r²" },
+        "correct_option": "A",
+        "explanation": "Correct is A. B = μ₀I / (2πr) ∝ 1/r.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 9,
+        "subject": "physics",
+        "topic": "Optics",
+        "question_text": "For a convex lens f=20 cm, if image is formed at v=40 cm (real), object distance u is?",
+        "options": { "A": "40 cm", "B": "20 cm", "C": "13.33 cm", "D": "26.67 cm" },
+        "correct_option": "A",
+        "explanation": "Correct is A (magnitude). Using 1/f = 1/v - 1/u → u = -40 cm.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "B"
+      },
+      {
+        "id": 10,
+        "subject": "physics",
+        "topic": "Modern Physics",
+        "question_text": "If de Broglie wavelength λ at velocity v, new wavelength when velocity doubled?",
+        "options": { "A": "λ", "B": "λ/2", "C": "2λ", "D": "λ/4" },
+        "correct_option": "B",
+        "explanation": "Correct is B. λ = h/(mv) ∝ 1/v → doubles velocity halves wavelength.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      }
+    ],
+    "chemistry": [
+      {
+        "id": 1,
+        "subject": "chemistry",
+        "topic": "Atomic Structure",
+        "question_text": "Maximum number of electrons in an orbital (any n,l)?",
+        "options": { "A": "2", "B": "6", "C": "10", "D": "14" },
+        "correct_option": "A",
+        "explanation": "Correct is A. Pauli exclusion principle → max 2 electrons per orbital.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      },
+      {
+        "id": 2,
+        "subject": "chemistry",
+        "topic": "Periodic Table",
+        "question_text": "Element with highest electronegativity?",
+        "options": { "A": "Fluorine", "B": "Chlorine", "C": "Oxygen", "D": "Nitrogen" },
+        "correct_option": "A",
+        "explanation": "Correct is A. Fluorine has highest electronegativity (4.0).",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "C"
+      },
+      {
+        "id": 3,
+        "subject": "chemistry",
+        "topic": "Chemical Bonding",
+        "question_text": "The bond in HF is?",
+        "options": { "A": "Ionic", "B": "Covalent", "C": "Coordinate", "D": "Metallic" },
+        "correct_option": "B",
+        "explanation": "Correct is B (polar covalent bond).",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "D"
+      },
+      {
+        "id": 4,
+        "subject": "chemistry",
+        "topic": "States of Matter",
+        "question_text": "Volume inversely proportional to pressure at constant temperature is?",
+        "options": { "A": "Boyle's law", "B": "Charles' law", "C": "Avogadro's law", "D": "Gay-Lussac's law" },
+        "correct_option": "A",
+        "explanation": "Correct is A (Boyle's law).",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 5,
+        "subject": "chemistry",
+        "topic": "Thermodynamics",
+        "question_text": "For an exothermic reaction, ΔH is?",
+        "options": { "A": "Positive", "B": "Negative", "C": "Zero", "D": "Cannot be determined" },
+        "correct_option": "B",
+        "explanation": "Correct is B. Heat released → ΔH negative.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      },
+      {
+        "id": 6,
+        "subject": "chemistry",
+        "topic": "Equilibrium",
+        "question_text": "Unit of Kc for N₂ + 3H₂ ⇌ 2NH₃ ?",
+        "options": { "A": "mol⁻² L²", "B": "mol L⁻¹", "C": "No unit", "D": "mol² L⁻²" },
+        "correct_option": "A",
+        "explanation": "Correct is A.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "C"
+      },
+      {
+        "id": 7,
+        "subject": "chemistry",
+        "topic": "Redox Reactions",
+        "question_text": "Oxidizing agent in Zn + CuSO₄ → ZnSO₄ + Cu is?",
+        "options": { "A": "Zn", "B": "CuSO₄", "C": "ZnSO₄", "D": "Cu" },
+        "correct_option": "B",
+        "explanation": "Correct is B. Cu²⁺ is reduced.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      },
+      {
+        "id": 8,
+        "subject": "chemistry",
+        "topic": "Organic Chemistry",
+        "question_text": "Functional group present in ethanol?",
+        "options": { "A": "-CHO", "B": "-COOH", "C": "-OH", "D": "-CO-" },
+        "correct_option": "C",
+        "explanation": "Correct is C (alcohol group).",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "C"
+      },
+      {
+        "id": 9,
+        "subject": "chemistry",
+        "topic": "Hydrocarbons",
+        "question_text": "Hybridization of carbon in ethene (C₂H₄)?",
+        "options": { "A": "sp", "B": "sp²", "C": "sp³", "D": "dsp²" },
+        "correct_option": "B",
+        "explanation": "Correct is B (due to double bond).",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "B"
+      },
+      {
+        "id": 10,
+        "subject": "chemistry",
+        "topic": "Environmental Chemistry",
+        "question_text": "Main cause of ozone layer depletion?",
+        "options": { "A": "CO₂", "B": "CFCs", "C": "SO₂", "D": "NO₂" },
+        "correct_option": "B",
+        "explanation": "Correct is B. CFCs release chlorine radicals.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      }
+    ],
+    "math": [
+      {
+        "id": 1,
+        "subject": "math",
+        "topic": "Trigonometry",
+        "question_text": "If sinθ = 3/5 and θ acute, cosθ = ?",
+        "options": { "A": "3/5", "B": "4/5", "C": "5/3", "D": "5/4" },
+        "correct_option": "B",
+        "explanation": "Correct is B. sin²θ + cos²θ =1 → cosθ=4/5.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "C"
+      },
+      {
+        "id": 2,
+        "subject": "math",
+        "topic": "Matrices",
+        "question_text": "Determinant of |2 3; 4 5| is?",
+        "options": { "A": "10", "B": "-2", "C": "2", "D": "-10" },
+        "correct_option": "B",
+        "explanation": "Correct is B. (2×5)-(3×4)=10-12=-2.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      },
+      {
+        "id": 3,
+        "subject": "math",
+        "topic": "Limits",
+        "question_text": "lim(x→0) (sin x / x) = ?",
+        "options": { "A": "0", "B": "1", "C": "∞", "D": "-1" },
+        "correct_option": "B",
+        "explanation": "Correct is B. Standard limit value is 1.",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "B"
+      },
+      {
+        "id": 4,
+        "subject": "math",
+        "topic": "Vectors",
+        "question_text": "Magnitude of vector 3i + 4j?",
+        "options": { "A": "5", "B": "7", "C": "12", "D": "1" },
+        "correct_option": "A",
+        "explanation": "Correct is A. √(9+16)=5.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 5,
+        "subject": "math",
+        "topic": "Probability",
+        "question_text": "Probability of head in fair coin toss?",
+        "options": { "A": "1/2", "B": "1/3", "C": "1", "D": "0" },
+        "correct_option": "A",
+        "explanation": "Correct is A.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "C"
+      },
+      {
+        "id": 6,
+        "subject": "math",
+        "topic": "Complex Numbers",
+        "question_text": "Conjugate of 3+4i is?",
+        "options": { "A": "3-4i", "B": "3+4i", "C": "-3+4i", "D": "-3-4i" },
+        "correct_option": "A",
+        "explanation": "Correct is A.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 7,
+        "subject": "math",
+        "topic": "Binomial Theorem",
+        "question_text": "Term independent of x in (x + 1/x)^4 is coefficient of?",
+        "options": { "A": "x⁰", "B": "x²", "C": "x⁴", "D": "x⁻⁴" },
+        "correct_option": "A",
+        "explanation": "Correct is A (constant term when power of x is zero).",
+        "extra": { "difficulty": "medium" },
+        "student_answer": "A"
+      },
+      {
+        "id": 8,
+        "subject": "math",
+        "topic": "Sequences and Series",
+        "question_text": "Sum of first n natural numbers?",
+        "options": { "A": "n(n+1)/2", "B": "n²", "C": "n(n-1)/2", "D": "n³/3" },
+        "correct_option": "A",
+        "explanation": "Correct is A.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 9,
+        "subject": "math",
+        "topic": "Coordinate Geometry",
+        "question_text": "Distance between (0,0) and (3,4)?",
+        "options": { "A": "5", "B": "7", "C": "12", "D": "25" },
+        "correct_option": "A",
+        "explanation": "Correct is A. √(9+16)=5.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "A"
+      },
+      {
+        "id": 10,
+        "subject": "math",
+        "topic": "Algebra",
+        "question_text": "Roots of x² - 5x + 6 = 0 are?",
+        "options": { "A": "2 and 3", "B": "1 and 6", "C": "-2 and -3", "D": "5 and 1" },
+        "correct_option": "A",
+        "explanation": "Correct is A.",
+        "extra": { "difficulty": "easy" },
+        "student_answer": "B"
+      }
+    ]
+  },
+  "student_submission": {
+    "student_id": "VISHAL_2026_001",
+    "student_name": "Vishal Sharma",
+    "total_attempted": 30,
+    "submission_summary": {
+      "physics": { "correct": 7, "wrong": 3 },
+      "chemistry": { "correct": 8, "wrong": 2 },
+      "math": { "correct": 7, "wrong": 3 }
+    }
+  }
+}

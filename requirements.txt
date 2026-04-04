@@ -4,3 +4,11 @@ psycopg2-binary
 bcrypt==4.0.1
 passlib[bcrypt]
 pyjwt
+
+
+langchain
+langchain-openai
+python-dotenv
+langchain_community
+scalar-fastapi
+pydantic
