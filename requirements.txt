@@ -1,1 +1,6 @@
 fastapi[all]
+sqlalchemy
+psycopg2-binary
+bcrypt==4.0.1
+passlib[bcrypt]
+pyjwt
