@@ -3,35 +3,63 @@ from pathlib import Path
 from typing import Any
 
 from src.data_models.response_format import QuizEvaluation
+from src.data_models.schemas import ChatRequest, QuizSubmissionRequest
+
 from  src.services.azure_clients import getResponseModelClient
-from  src.prompts.system_messages import SYSTEM_MESSAGE
+from  src.prompts.system_messages import SYSTEM_MESSAGE_TEMPLATE
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 json_file_path_org = BASE_DIR / "sample_data" / "questions.json"
+import json
 
-async def format_prompt(user_input:Any):
-    try: 
-        messages=[
-                {
-                    "role": "system",
-                    "content": SYSTEM_MESSAGE,
-                },
-                {
-                    "role": "user",
-                    "content": str(user_input),
-                }
-            ]
+async def format_prompt(req: QuizSubmissionRequest):
+    try:
+
+        subject_str = ", ".join(req.subject)
+        # ✅ Format system message dynamically
+        system_message = SYSTEM_MESSAGE_TEMPLATE.format(
+            exam=req.exam,
+            subject=subject_str
+        )
+
+        # ✅ Filter ONLY wrong questions
+        wrong_questions = [
+            {
+                "questionNumber": q.questionNumber,
+                "questionText": q.questionText,
+                "options": q.options,
+                "correctAnswer": q.correctAnswer,
+                "userResponse": q.userResponse,
+            }
+            for q in req.results
+            if q.userResponse != None and  q.userResponse != q.correctAnswer
+        ]
+
+        # ✅ Create messages
+        messages = [
+            {
+                "role": "system",
+                "content": system_message,
+            },
+            {
+                "role": "user",
+                "content": json.dumps({
+                    "wrong_questions": wrong_questions
+                })
+            }
+        ]
 
         return messages
+
     except Exception as e:
-        pass
+        return []
+    
 
 
 async def simulate_paper_submission(subject:str):
 
     try:
-        json_file_path = "D:\Git_Repos\ParikshaSathi\src\sample_data\questions.json"
         json_file_path = json_file_path_org
         # 1. Load the JSON file
         file_path = Path(json_file_path)
@@ -57,11 +85,11 @@ async def simulate_paper_submission(subject:str):
         raise
 
 
-async def getQuizResponse(user_id: int, subject: str, n: int):
+async def getQuizResponse(req : QuizSubmissionRequest):
     try:
         llm_client = await getResponseModelClient()
-        user_input = await simulate_paper_submission(subject=subject)
-        messages = await format_prompt(user_input=user_input[:n])
+        # user_input = await simulate_paper_submission(subject='math')
+        messages = await format_prompt(req)
 
         structured_llm = llm_client.with_structured_output(
             QuizEvaluation,
@@ -87,18 +115,11 @@ async def getQuizResponse(user_id: int, subject: str, n: int):
             # ✅ Clean serialization (prevents warnings)
             clean_data = QuizEvaluation(**parsed.model_dump()).model_dump()
 
-            # ✅ Optional debug (SAFE)
-            debug_info = {
-                "model": raw.response_metadata.get("model_name"),
-                "finish_reason": raw.response_metadata.get("finish_reason"),
-                "has_parsed": parsed is not None
-            }
 
             return {
                 "status": "success",
                 "data": clean_data,
                 "token_usage": usage,
-                "debug": debug_info,   # ✅ safe debug (optional)
                 "error": None,
                 "from": 1
             }
