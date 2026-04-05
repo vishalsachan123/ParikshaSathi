@@ -32,3 +32,20 @@ class ChatRequest(BaseModel):
     correct: str
     user_answer: Optional[str]
     query: str
+
+
+
+
+class QuestionSubmission(BaseModel):
+    questionNumber: int
+    questionText: str
+    options: List[str]
+    correctAnswer: int
+    userResponse: Optional[int] = None
+    explanation: Optional[str] = None
+
+
+class QuizSubmissionRequest(BaseModel):
+    results: List[QuestionSubmission]
+    exam: str
+    subject: List[str]   # ✅ change to list

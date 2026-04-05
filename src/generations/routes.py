@@ -1,14 +1,14 @@
 from fastapi import APIRouter
-from src.data_models.schemas import ChatRequest
+from src.data_models.schemas import ChatRequest, QuizSubmissionRequest
 from src.generations.utils import getQuizResponse
 
 router = APIRouter()
 router = APIRouter(prefix="/gen", tags=["Generations"])
 
-@router.get("/evaluateAnswers")
-async def get_evaluateAnswers(user_id: int, subject: str, n:int):
-    try:                     
-        return await getQuizResponse(user_id, subject, n)
+@router.post("/evaluateAnswers")
+async def evaluate_answers(req: QuizSubmissionRequest):
+    try:
+        return await getQuizResponse(req)
     except Exception as e:
         return {"error": str(e)}
 
