@@ -1,4 +1,4 @@
-from  ..prompts.system_messages import SYSTEM_MESSAGE
+from  src.prompts.system_messages import SYSTEM_MESSAGE
 import json
 from pathlib import Path
 from typing import Any
