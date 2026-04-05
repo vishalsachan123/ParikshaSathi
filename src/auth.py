@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from passlib.context import CryptContext
-from .db.database import get_db, Base, engine
-from .db.models import UserDB
-from .data_models.schemas import UserSignup, UserLogin, APIResponse
+from src.db.database import get_db, Base, engine
+from src.db.models import UserDB
+from src.data_models.schemas import UserSignup, UserLogin, APIResponse
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -69,6 +69,7 @@ def signin(credentials: UserLogin, db: Session = Depends(get_db)):
         # 4. Return response with token
         return {
             "status": "success",
+            "message":"sign in succesfully",
             "token": token,
         }
     except HTTPException as e:

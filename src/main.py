@@ -1,14 +1,21 @@
 from fastapi import FastAPI
-from .auth import router as auth_router
+from src.auth import router as auth_router
 from fastapi.middleware.cors import CORSMiddleware
 
 
 from scalar_fastapi import get_scalar_api_reference
-from .utils.logger import logger
-from .data_models.response_format import QuizEvaluation
+from src.utils.logger import logger
+from src.data_models.response_format import QuizEvaluation
 # logger.disabled = True
-from  .services.azure_clients import getResponseModelClient
-from .utils.helper_methods import format_prompt, simulate_paper_submission
+from  src.services.azure_clients import getResponseModelClient
+from src.utils.helper_methods import format_prompt, simulate_paper_submission
+from fastapi import FastAPI, Request, HTTPException
+from pydantic import BaseModel
+from typing import List, Optional
+
+
+from src.data_models.schemas import ChatRequest
+
 
 
 app = FastAPI()
@@ -23,6 +30,26 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+
+
+
+PUBLIC_PATHS = {"/", "/docs", "/redoc", "/openapi.json", "/health", "/login", "/register"}
+
+
+@app.middleware("http")
+async def authenticate_middleware(request: Request, call_next):
+    if request.url.path in PUBLIC_PATHS:
+        return await call_next(request)
+
+    # auth_header = request.headers.get("Authorization")
+    # if not auth_header or not auth_header.startswith("Bearer "):
+    #     raise HTTPException(status_code=401, detail="Not authenticated")
+
+    # token = auth_header.split(" ")[1]
+    # # Add your token validation logic here...
+
+    response = await call_next(request)
+    return response
 
 
 @app.get("/")
@@ -44,6 +71,37 @@ async def get_evaluateAnswers(user_id: int, subject: str, n:int):
         return await getQuizResponse(user_id, subject, n)
     except Exception as e:
         return {"error": str(e)}
+
+
+
+
+
+# ✅ Chat endpoint
+@app.post("/api/chat")
+async def chat(req: ChatRequest):
+
+    q = req.query.lower()
+
+    # 🔹 simple logic (string response only)
+    if "explain" in q:
+        return f"Explanation: The correct answer is '{req.correct}' for this question."
+
+    elif "answer" in q:
+        return f"Correct answer is: {req.correct}"
+
+    elif "my answer" in q:
+        if req.user_answer:
+            return f"You selected: {req.user_answer}"
+        return "You have not selected any answer."
+
+    elif "correct or not" in q:
+        if req.user_answer == req.correct:
+            return "Yes ✅ Your answer is correct!"
+        else:
+            return f"No ❌ Correct answer is {req.correct}"
+
+    else:
+        return "Ask something like: explain, answer, or check my answer2."
 
 async def getQuizResponse(user_id: int, subject: str, n: int):
     try:

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 class UserSignup(BaseModel):
     username: str
@@ -23,3 +23,12 @@ class APIResponse(BaseModel):
     message: str
     data: Optional[Any] = None
     token: Optional[str] = None # Added for login
+
+
+# ✅ Request schema
+class ChatRequest(BaseModel):
+    question: str
+    options: List[str]
+    correct: str
+    user_answer: Optional[str]
+    query: str
