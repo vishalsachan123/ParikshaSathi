@@ -5,7 +5,10 @@ from typing import Any
 from src.data_models.response_format import QuizEvaluation
 from  src.services.azure_clients import getResponseModelClient
 from  src.prompts.system_messages import SYSTEM_MESSAGE
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+json_file_path_org = BASE_DIR / "sample_data" / "questions.json"
 
 async def format_prompt(user_input:Any):
     try: 
@@ -29,6 +32,7 @@ async def simulate_paper_submission(subject:str):
 
     try:
         json_file_path = "D:\Git_Repos\ParikshaSathi\src\sample_data\questions.json"
+        json_file_path = json_file_path_org
         # 1. Load the JSON file
         file_path = Path(json_file_path)
         if not file_path.exists():
