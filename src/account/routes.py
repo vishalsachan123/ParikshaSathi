@@ -1,3 +1,4 @@
+import os
 import jwt
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -7,12 +8,15 @@ from passlib.context import CryptContext
 from src.db.database import get_db, Base, engine
 from src.db.models import UserDB
 from src.data_models.schemas import UserSignup, UserLogin, APIResponse
+from dotenv import load_dotenv
+
+load_dotenv()
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # JWT Configuration (Move these to .env later!)
-SECRET_KEY = "your_super_secret_key_change_me" 
+SECRET_KEY = os.getenv('SECRET_KEY')
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 24 hours
 
