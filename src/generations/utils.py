@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import Any
+import hashlib
 
 from src.data_models.response_format import QuizEvaluation
 from src.data_models.schemas import ChatRequest, QuizSubmissionRequest
@@ -8,6 +9,7 @@ from src.data_models.schemas import ChatRequest, QuizSubmissionRequest
 from  src.services.azure_clients import getResponseModelClient
 from  src.prompts.system_messages import SYSTEM_MESSAGE_TEMPLATE
 from pathlib import Path
+from src.services.azure_clients import getResponseModelClient
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 json_file_path_org = BASE_DIR / "sample_data" / "questions.json"
@@ -162,3 +164,55 @@ async def getQuizResponse(req : QuizSubmissionRequest):
             "error": str(e),
             "from": 4
         }
+    
+
+
+
+def build_system_prompt(ctx, exam, subjects):
+    subjects_str = ", ".join(subjects)
+
+    return f"""
+You are an expert {subjects_str} tutor for {exam} level.
+
+Q: {ctx.question}
+Options: {", ".join(ctx.options)}
+Student: {ctx.userSelectedOption}
+Correct: {ctx.correctOption}
+
+Generate response in Markdown Format.
+Explain briefly (2–3 lines).
+If wrong, point mistake clearly.
+Use steps only if needed (math/physics, keep minimal).
+Max 8–10 lines.
+
+Suggest 2 short follow-up questions.
+"""
+
+
+
+
+async def get_questionwise_interaction_response(req: ChatRequest, ctx, user_id):
+
+    ctx = req.question_context
+
+    system_prompt = build_system_prompt(
+        ctx,
+        exam=req.question_context.examType,
+        subjects=req.question_context.subjects
+    )
+
+    llm = await getResponseModelClient()
+
+    messages = [
+        {"role": "system", "content": system_prompt}
+    ] + [msg.model_dump() for msg in req.history] + [
+        {"role": "user", "content": req.user_query}
+    ]
+
+    res = await llm.ainvoke(messages)
+    return res.content
+
+    
+
+
+    

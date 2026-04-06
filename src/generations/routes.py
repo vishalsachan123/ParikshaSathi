@@ -1,13 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from src.data_models.schemas import ChatRequest, QuizSubmissionRequest
-from src.generations.utils import getQuizResponse
+from src.generations.utils import getQuizResponse, get_questionwise_interaction_response
+from fastapi import Request
+
 
 router = APIRouter()
 router = APIRouter(prefix="/gen", tags=["Generations"])
 
 @router.post("/evaluateAnswers")
-async def evaluate_answers(req: QuizSubmissionRequest):
+async def evaluate_answers(req: QuizSubmissionRequest, request: Request):
     try:
+        user_details = request.state.user
         return await getQuizResponse(req)
     except Exception as e:
         return {"error": str(e)}
@@ -15,29 +18,16 @@ async def evaluate_answers(req: QuizSubmissionRequest):
 
 # ✅ Chat endpoint
 @router.post("/api/chat")
-async def chat(req: ChatRequest):
+async def chat(req: ChatRequest, request: Request):
+    try:
+        user = request.state.user
+        user_id = user["user_id"]
+        ctx = req.question_context
+        
+        response = await get_questionwise_interaction_response(req, ctx, user_id)
+        return {"answer" : response}
+    except Exception as e:
+        return {"answer": "..."}
 
-    q = req.query.lower()
-
-    # 🔹 simple logic (string response only)
-    if "explain" in q:
-        return f"Explanation: The correct answer is '{req.correct}' for this question."
-
-    elif "answer" in q:
-        return f"Correct answer is: {req.correct}"
-
-    elif "my answer" in q:
-        if req.user_answer:
-            return f"You selected: {req.user_answer}"
-        return "You have not selected any answer."
-
-    elif "correct or not" in q:
-        if req.user_answer == req.correct:
-            return "Yes ✅ Your answer is correct!"
-        else:
-            return f"No ❌ Correct answer is {req.correct}"
-
-    else:
-        return "Ask something like: explain, answer, or check my answer2."
 
 
