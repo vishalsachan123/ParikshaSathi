@@ -1,0 +1,10 @@
+#Azure OpenAI
+endpoint = ""
+model_name = "gpt-chat-latest"
+deployment = "gpt-chat-latest"
+subscription_key = ""
+api_version = "2024-12-01-preview"
+temperature = 1
+
+# DATABASE_URL = ""
+SECRET_KEY = ""
