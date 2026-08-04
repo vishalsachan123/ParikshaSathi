@@ -8,6 +8,7 @@ model_name = os.getenv('model_name')
 deployment = os.getenv('deployment')
 subscription_key = os.getenv('subscription_key')
 api_version = os.getenv('api_version')
+temperature = os.getenv('temperature')
 llm = None
 
 async def getResponseModelClient():
@@ -20,7 +21,7 @@ async def getResponseModelClient():
                 azure_endpoint=endpoint,
                 api_key=subscription_key,
                 azure_deployment=deployment,
-                temperature=0.7,
+                temperature=temperature,
             )
         return llm
     except Exception as e:

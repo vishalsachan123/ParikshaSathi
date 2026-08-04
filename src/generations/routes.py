@@ -27,7 +27,7 @@ async def chat(req: ChatRequest, request: Request):
         response = await get_questionwise_interaction_response(req, ctx, user_id)
         return {"answer" : response}
     except Exception as e:
-        return {"answer": "..."}
+        return {"answer": f"Error in Genration Client : {str(e)}"}
 
 
 
