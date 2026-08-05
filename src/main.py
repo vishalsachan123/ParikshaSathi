@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 
+from fastapi.responses import JSONResponse
 from src.data_models.schemas import ChatRequest
 from src.generations.routes import router as generations_router
 from src.account.routes import router as account_router
@@ -32,7 +33,16 @@ app.include_router(account_router)
 app.include_router(generations_router)
 
 
-PUBLIC_PATHS = {"/", "/docs", "/auth/signin", "/auth/signup"}
+# PUBLIC_PATHS = {"/", "/docs", "/auth/signin", "/auth/signup", "/scalar"}
+
+PUBLIC_PATHS = {
+    "/",
+    "/docs",
+    "/openapi.json",
+    "/scalar",
+    "/auth/signin",
+    "/auth/signup",
+}
 
 
 # JWT Configuration (Move these to .env later!)
@@ -81,7 +91,12 @@ async def authenticate_middleware(request: Request, call_next):
 
         # ✅ Optional: attach user to request
         if not status:
-            return {"status" : "Authentication Problem"}
+            # return {"status" : "Authentication Problem"}
+
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Invalid or expired token"}
+            )
         
         request.state.user = payload
 
@@ -89,10 +104,12 @@ async def authenticate_middleware(request: Request, call_next):
         return response
 
     except Exception as e:
-        return {"status" : "Authentication Problem"}
+        # return {"status" : "Authentication Problem"}
+        return JSONResponse(
+                        status_code=401,
+                        content={"detail": "Internal Server Error"}
+                    )
     
-
-
 
 @app.get("/")
 async def get_root():
